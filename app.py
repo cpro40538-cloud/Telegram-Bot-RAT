@@ -8,14 +8,9 @@ BASE_URL = f"https://api.telegram.org/bot{BOT_TOKEN}"
 
 app = Flask(__name__)
 
-@app.route("/", methods=["GET"])
-def home():
-    return "Bot is running", 200
-
-@app.route("/webhook", methods=["GET", "POST"])
-def webhook():
+@app.route("/", methods=["GET", "POST"])
+def index():
     if request.method == "GET":
-        # Telegram xác minh webhook bằng GET
         return "OK", 200
 
     data = request.get_json(force=True)
