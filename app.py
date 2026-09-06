@@ -12,8 +12,12 @@ app = Flask(__name__)
 def home():
     return "Bot is running", 200
 
-@app.route("/webhook", methods=["POST"])
+@app.route("/webhook", methods=["GET", "POST"])
 def webhook():
+    if request.method == "GET":
+        # Telegram xác minh webhook bằng GET
+        return "OK", 200
+
     data = request.get_json(force=True)
     if "message" in data:
         chat_id = data["message"]["chat"]["id"]
